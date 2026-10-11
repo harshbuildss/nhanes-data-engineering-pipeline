@@ -1,14 +1,14 @@
 # NHANES Data Engineering Pipeline
 
-An end-to-end data engineering project that processes public health demographic data from the National Health and Nutrition Examination Survey (NHANES) using Python, Pandas, Apache Airflow, PostgreSQL, and Power BI.
+## 📌 Project Overview
 
-## Project Overview
+This project implements an end-to-end data engineering pipeline using public health data from the National Health and Nutrition Examination Survey (NHANES).
 
-This project demonstrates how raw public health data can be transformed into structured datasets and analytical summaries for reporting.
+The pipeline ingests raw data, transforms and cleans it using Python and Pandas, creates aggregated datasets, loads them into PostgreSQL, and supports visualization through Power BI.
 
-The pipeline downloads NHANES data, transforms and cleans demographic information, creates aggregated datasets, loads the results into PostgreSQL, and supports visualization through Power BI.
+Apache Airflow orchestrates the pipeline workflow.
 
-## Architecture
+## 🏗️ Project Architecture
 
 ```text
 NHANES Dataset
@@ -17,36 +17,40 @@ NHANES Dataset
 Python Data Ingestion
       |
       v
-Raw Layer
+Raw Data Layer
       |
       v
 Silver Layer
 (Pandas Transformation)
       |
       v
+Data Quality Tests (pytest)
+      |
+      v
 Gold Layer
 (Aggregated Parquet Files)
       |
       v
-PostgreSQL
+PostgreSQL Database
       |
       v
 Power BI Dashboard
-```
 
 Apache Airflow orchestrates the pipeline tasks.
+```
 
-## Technologies Used
+## 🛠️ Technologies Used
 
-* **Python** — Data ingestion and pipeline logic
-* **Pandas** — Data cleaning and transformation
-* **Apache Airflow** — Workflow orchestration
-* **Parquet** — Storage of transformed and aggregated datasets
-* **PostgreSQL** — Analytical data storage
-* **Power BI** — Data visualization and reporting
-* **Git and GitHub** — Version control and project management
+- **Python** — Data ingestion and pipeline logic
+- **Pandas** — Data cleaning and transformation
+- **Apache Airflow** — Workflow orchestration
+- **Parquet** — Storage of transformed and aggregated datasets
+- **PostgreSQL** — Analytical data storage
+- **Power BI** — Data visualization and reporting
+- **pytest** — Silver-layer data quality testing
+- **Git and GitHub** — Version control and project hosting
 
-## Pipeline Workflow
+## 🔄 Pipeline Workflow
 
 ### 1. Data Ingestion
 
@@ -56,20 +60,32 @@ Downloads the NHANES demographic dataset and stores the original file in the raw
 
 Processes the raw dataset using Pandas, selects relevant demographic and socioeconomic attributes, creates readable categories, and prepares a structured Silver dataset.
 
-### 3. Gold Layer
+The transformed dataset is stored in Parquet format.
+
+### 3. Data Quality Testing
+
+Uses pytest to validate the Silver dataset.
+
+The tests check that:
+- Participant IDs are unique.
+- Participant IDs are not missing.
+- Required columns are present.
+- Ages are within the expected range and are not missing.
+
+### 4. Gold Layer
 
 Creates aggregated datasets for analysis:
 
-* Participant counts by age group and gender
-* Average income-to-poverty ratio by age group
+- Participant counts by age group and gender
+- Average income-to-poverty ratio by age group
 
-The aggregated datasets are stored in Parquet format.
+The aggregated datasets are stored as Parquet files.
 
-### 4. PostgreSQL Loading
+### 5. PostgreSQL Integration
 
 Loads the Gold datasets into PostgreSQL tables for downstream analysis.
 
-### 5. Workflow Orchestration
+### 6. Workflow Orchestration
 
 Apache Airflow coordinates the pipeline through four tasks:
 
@@ -78,11 +94,11 @@ Apache Airflow coordinates the pipeline through four tasks:
 3. `create_gold`
 4. `load_postgresql`
 
-### 6. Visualization
+### 7. Data Visualization
 
 Power BI connects to the analytical data to present demographic and socioeconomic insights through a dashboard.
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 NHANES_BRFSS_Data_Engineering/
@@ -103,35 +119,55 @@ NHANES_BRFSS_Data_Engineering/
 ├── silver/
 │   ├── transform_nhanes.py
 │   └── nhanes_demographics.parquet
+├── tests/
+│   └── test_silver_data.py
 └── README.md
 ```
 
-## Data Source
+## 📊 Gold Datasets
+
+### Participant Count by Age and Gender
+
+Summarizes participant counts across age groups and gender categories.
+
+### Average Income-to-Poverty Ratio by Age
+
+Summarizes the average income-to-poverty ratio across age groups.
+
+## 🎯 Learning Outcomes
+
+Through this project, I practiced:
+
+- Building a multi-stage data pipeline
+- Ingesting public datasets using Python
+- Cleaning and transforming data with Pandas
+- Organizing data into raw, Silver, and Gold layers
+- Working with Parquet files
+- Writing data quality tests with pytest
+- Loading analytical datasets into PostgreSQL
+- Orchestrating data workflows with Apache Airflow
+- Preparing processed data for Power BI visualization
+- Managing project code with Git and GitHub
+
+## 📚 Data Source
 
 **National Health and Nutrition Examination Survey (NHANES)**
 
-NHANES is a program of the U.S. National Center for Health Statistics that collects information about the health and nutritional status of people in the United States.
+NHANES is a program of the US National Center for Health Statistics that collects information about the health and nutritional status of people in the United States.
 
-The project uses the NHANES demographic dataset for demographic and socioeconomic analysis.
+The project uses NHANES demographic data for demographic and socioeconomic analysis.
 
 Official website: https://www.cdc.gov/nchs/nhanes/
 
-## Key Learning Outcomes
+## 🚀 Future Improvements
 
-* Building a multi-stage data pipeline
-* Working with raw and transformed datasets
-* Cleaning and transforming data using Pandas
-* Creating analytical aggregations
-* Storing structured data in Parquet
-* Loading datasets into PostgreSQL
-* Orchestrating data workflows with Apache Airflow
-* Preparing data for business intelligence dashboards
-* Managing project code with Git and GitHub
+Potential extensions include:
 
-## Future Improvements
+- Integrating additional NHANES datasets
+- Improving data validation and pipeline monitoring
+- Adding more analytical datasets and reports
+- Expanding automated testing
 
-Potential extensions include improved data validation, automated pipeline monitoring, and additional analytical reporting.
+## ⚠️ Disclaimer
 
-## Disclaimer
-
-This project is intended for educational and portfolio purposes. The analysis is based on public NHANES data and should not be interpreted as medical advice.
+This project is intended for educational and portfolio purposes. It demonstrates data engineering techniques using public health survey data and is not intended for clinical or medical decision-making.
