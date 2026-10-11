@@ -1,0 +1,64 @@
+<mxfile host="Electron" agent="ChatGPT">
+  <diagram id="nhanes-simple" name="NHANES Pipeline">
+    <mxGraphModel dx="1288" dy="843" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#222222;" value="NHANES Data Engineering Pipeline" vertex="1">
+          <mxGeometry height="40" width="490" x="255" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="source" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#666666;fontColor=#222222;fontSize=14;" value="NHANES public dataset&lt;br&gt;(XPT files)" vertex="1">
+          <mxGeometry height="50" width="300" x="350" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ingest" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#666666;fontColor=#222222;fontSize=14;" value="Python ingestion&lt;br&gt;(download and read data)" vertex="1">
+          <mxGeometry height="50" width="300" x="350" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="raw" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#666666;fontColor=#222222;fontSize=14;" value="Raw data / Bronze" vertex="1">
+          <mxGeometry height="50" width="300" x="350" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="silver" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#666666;fontColor=#222222;fontSize=14;" value="Pandas transformation / Silver&lt;br&gt;(Parquet)" vertex="1">
+          <mxGeometry height="55" width="300" x="350" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="tests" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#666666;fontColor=#222222;fontSize=14;" value="Data quality tests&lt;br&gt;(pytest)" vertex="1">
+          <mxGeometry height="50" width="300" x="350" y="415" as="geometry" />
+        </mxCell>
+        <mxCell id="gold" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#666666;fontColor=#222222;fontSize=14;" value="Gold analytics tables&lt;br&gt;(aggregated Parquet)" vertex="1">
+          <mxGeometry height="50" width="300" x="350" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="postgres" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#666666;fontColor=#222222;fontSize=14;" value="PostgreSQL" vertex="1">
+          <mxGeometry height="50" width="300" x="350" y="575" as="geometry" />
+        </mxCell>
+        <mxCell id="powerbi" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#666666;fontColor=#222222;fontSize=14;" value="Power BI dashboard" vertex="1">
+          <mxGeometry height="50" width="300" x="350" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="airflow" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#222222;fontSize=13;" value="Apache Airflow&lt;br&gt;&lt;br&gt;download_nhanes&lt;br&gt;transform_nhanes&lt;br&gt;create_gold&lt;br&gt;load_postgresql" vertex="1">
+          <mxGeometry height="200" width="230" x="730" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="e_source" edge="1" parent="1" source="source" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#555555;" target="ingest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ingest" edge="1" parent="1" source="ingest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#555555;" target="raw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_raw" edge="1" parent="1" source="raw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#555555;" target="silver">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_silver" edge="1" parent="1" source="silver" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#555555;" target="tests">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tests" edge="1" parent="1" source="tests" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#555555;" target="gold">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gold" edge="1" parent="1" source="gold" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#555555;" target="postgres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_postgres" edge="1" parent="1" source="postgres" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#555555;" target="powerbi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V8oUX1xsvJ-O3kccw03O-8" parent="1" style="whiteSpace=wrap;html=1;" value="&#xa;Orchestrates all pipeline tasks&#xa;&#xa;" vertex="1">
+          <mxGeometry height="85" width="160" x="765" y="495" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
